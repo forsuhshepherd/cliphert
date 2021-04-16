@@ -20,7 +20,6 @@
                     </li>
                 </ul>
             </div>
-            <div class="clearfix"></div>
 
             <!-- Categories and products -->
             <div v-if="categories && categories.length">

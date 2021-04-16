@@ -23,7 +23,7 @@ export default {
             error: []
         }
     },
-    created() {
+    async mounted() {
         try {
             this.$http.get('http://127.0.0.1:8000/api/product/' + this.id).then(function(res){
                 console.log(this.product);
@@ -38,5 +38,8 @@ export default {
 </script>
 
 <style lang="scss">
+#product {
+    padding-top: 150px;
+}
     
 </style>

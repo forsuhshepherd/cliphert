@@ -1,5 +1,5 @@
 <template>
-    <footer id="footer">
+    <footer id="footer" class="footer">
         <a href="#" id="toTop"> Back to Top </a>
         <div class="clearfix"></div>
         <div class="copyright">
@@ -17,15 +17,15 @@ export default {
 </script>
 
 <style lang="css">
-    #footer {
-        position:absolute;
+    /*#footer {
+        position: relative;
         width: 100%;
         bottom: 0;
         color: #fff;
         background-color: #141414;
         min-height: 10vh !important;
         height: auto;
-    }
+    }*/
     .primary-button {
         text-align: center;
         background-color: ;
