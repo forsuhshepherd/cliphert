@@ -1,0 +1,38 @@
+// Small devices (landscape phones, less than 768px
+@media (max-width: 767.98) {
+    .navbar-collapse {
+        border-top: none;
+        @include box-shadow(none);
+        width: 100%;
+        left: 0;
+        top: 60px;
+        position: absolute;
+        background: rgba(darken($text-color, 10%), 0.9);
+        z-index: 40;
+    }
+    .header.header-scrolled .main-nav .nav nav-link.active {
+        color: $color-primary;
+        border: none;
+    }
+    .main-nav .navbar-collapse .nav-item {
+        margin-right: 0;
+    }
+    .main-nav .navbar-collapse .nav-item a {
+        text-align: center;
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+    .feature-nav {
+        text-align: left;
+        padding-left: 30px;
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+    .main-nav .nav .nav-item {
+        margin-right: 25px;
+    }
+}

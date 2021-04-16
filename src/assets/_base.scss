@@ -1,0 +1,193 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: $text-color;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.bg-light {
+    background-color: darken($color-primary, 2%) !important;
+}
+
+p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+a {
+    color: darken($color-primary, 5%);
+    @include transition (all 0.4s ease-in-out);
+    &:hover {
+        text-decoration: underline;
+        color: darken($color-primary, 10%);
+    }
+    &:active {
+        text-decoration: none;
+    }
+    &:focus {
+        text-decoration: none;
+    }
+}
+
+// Header
+.header {
+    position: fixed;
+    width: 100%;
+    z-index: 60px;
+    //height: 60px;
+    @include transition (none);
+    @include box-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+    &.header-scrolled {
+        background: #fff;
+        a {
+            color: lighten($color: $color-secondary, $amount: 10);
+        }
+        .logo {
+            color: $color-primary;
+            padding-top: 12px;
+            .logo-icon-wrapper {
+                background: $color-primary;
+                width: 40px;
+                height: 40px;
+                @include border-radius(50%);
+                text-align: center;
+            }
+            .logo-icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 0;
+            }
+        }
+        .main-nav .nav .nav-link {
+            color: $text-grey;
+            &:hover {
+                color: darken($text-grey, 5%);
+            }
+        }
+        /*.main-nav .nav .nav-link.active {
+            color: $text-color;
+            border-bottom: 4px solid $color-primary;
+        }*/
+    }
+    a {
+        color: darken($color: $text-color, $amount: 10%);
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .logo {
+        margin: 0;
+        display: inline-block;
+        float: left;
+        font-size: 28px;
+        padding-top: 15px;
+        .logo-icon-wrapper {
+            margin-right: 3px;
+            position: relative;
+            display: inline-block;
+            top: -3px;
+        }
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+        }
+        .highlight {
+            font-weight: 700;
+        }
+    }
+}
+
+.main-nav {
+    margin-top: 6px;
+    .navbar-toggler {
+        margin-right: 0;
+        margin-top: 0;
+        background: none;
+        position: absolute;
+        padding: 8px 10px;
+        right: 10px;
+        top: 10px;
+        background: rgba(0, 0, 0, 0.6);
+        &:focus {
+            outline: none;
+        }
+        .icon-bar {
+            display: block;
+            background-color: #fff;
+            height: 3px;
+            width: 22px;
+            @include border-radius(1px);
+            &+.icon-bar {
+                margin-top: 4px;
+            }
+        }
+        &:hover {
+            .icon-bar {
+                background-color: #fff;
+            }
+        }
+    }
+    .nav {
+        .nav-item {
+            font-weight: normal;
+            font-size: 15px;
+            margin-right: 10px;
+            .nav-link {
+                color: $text-color-tertiary;
+                font-weight: 700;
+                &.active {
+                    position: relative;
+                    border-bottom: 4px solid $color-secondary;
+                    background: none;
+                    color: $color-dark-blue;
+                }
+                &:hover {
+                    border-bottom: 4px solid $color-secondary;
+                    color: darken($color: $text-color-tertiary, $amount: 25%);
+                    background: none;
+                }
+                &:focus {
+                    outline: none;
+                    background: none;
+                }
+                &:active {
+                    outline: none;
+                    border-bottom: 4px solid $color-secondary;
+                    background: none;
+                }
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.nav>li>a {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.nav-link {
+    padding: 15px;
+}
+
+// Footer
+.footer {
+    background: darken($text-color, 15%);
+    color: rgba(256, 256, 256, 0.6);
+    padding: 15px 0;
+    a {
+        color: $color-primary;
+    }
+    .fa-heart {
+        color: $color-dark-blue;
+    }
+}

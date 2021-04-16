@@ -1,0 +1,13 @@
+// Variables and defaults
+$color-primary: #fff;
+$color-secondary:#000000;
+$text-color: #494d55;
+$text-color-secondary: lighten($text-color, 10%);
+$text-color-tertiary: darken($text-color, 10%);
+$text-grey: lighten($text-color-secondary, 25%);
+$light-grey: #c3c3c3;
+$color-dark-blue: #00008B;
+// Imports
+@import "mixins";
+@import "base";
+@import "responsive";
