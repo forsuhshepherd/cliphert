@@ -12,6 +12,7 @@
                             <img src="" alt="preview">
                             <img src="" alt="preview">
                             <img src="" alt="preview">
+                            <img src="" alt="preview">
                         </div>
                     </div>
                     <aside class="product-details col-xl-7 col-lg-7 col-md-8 col-sm-12 col-xs-12">
@@ -71,9 +72,10 @@ export default {
     padding: 150px 0;
 }
 .product-pics {
+    //border: 1px solid #c3c3c3 !important;
     padding: 15px 0;
     :first-child {
-        margin-bottom: 3px;
+        margin-bottom: 1px;
     }
     .card {
         justify-content: space-between;
