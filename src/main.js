@@ -19,6 +19,7 @@ const router = new VueRouter({
 
 Vue.config.productionTip = false
 
+
 // Filters
 /* Capitalize first letter of every new word. */
 Vue.filter('capitalize', function(value) {

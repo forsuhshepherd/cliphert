@@ -29,7 +29,7 @@
                         </li>
                         <li class="nav-item"><router-link to="/sign-in" class="nav-link" exact><i class="fas fa-user"></i> Sign In</router-link></li>
                         <li class="nav-item"><router-link to="/sign-up" class="nav-link" exact><i class="fas fa-user-plus"></i> Sign Up</router-link></li>
-                        <li><span href="#" class="nav-link"><i class="fas fa-cart"></i>Cart</span></li>
+                        <li><a href="#" class="nav-link"><i class="fas fa-shopping-cart"></i>Cart</a></li>
                     </ul><!-- nav -->
                 </div><!-- navbar-collapse -->
                 <!--<div class="extras"><a href="#" class="">Lang</a>

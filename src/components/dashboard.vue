@@ -6,13 +6,16 @@
             <div class="options">
                 <ul class="bg-light">
                     <li class="filters">
-                        <h5 class="filter-header"><a href="#" on:click="" class=""><i class="fas fa-filter"></i> Filter </a></h5>
-                        <ul class="filter-options" id="filter">
-                            <li class="option" value="">Type</li>
-                            <li class="option">recent</li>
-                            <li class="option">price</li>
-                            <li class="option">location</li>
-                        </ul>
+                        <h5 class="filter-header"><a href="#" @click="filter_toggle=!filter_toggle">
+                            <i class="fas fa-filter"></i> Filter </a></h5>
+                        <slide-transition>
+                            <ul class="filter-options" v-show="filter_toggle" id="filter">
+                                <li class="option" value="">Type</li>
+                                <li class="option">recent</li>
+                                <li class="option">price</li>
+                                <li class="option">location</li>
+                            </ul>
+                        </slide-transition>
                     </li>
                     <li class="search">
                         <input class="" type="text" placeholder="Search">
@@ -20,25 +23,27 @@
                     </li>
                 </ul>
             </div>
-
+            <div class="loading-icon" v-show="loading"><img loading="lazy" class="img-fluid" src="../assets/YCZH.gif" alt="loading"></div>
             <!-- Categories and products -->
             <div v-if="categories && categories.length">
                 <div v-for="category of categories" :key="category.id">
-                <div class="card category">
-                        <h3 class="card-title">{{category.title}}</h3>
-                        <div class="card-columns" v-if="category.products && category.products.length">
-                            <div class="card" v-for="product of category.products" :key="product.id">
-                                <div class="card-body">
-                                    <img class="card-img-top" src="" alt="product cap" >
-                                    <h5 class="card-title">
-                                        <router-link v-bind:to="'/products/' + product.id">{{product.title | uppercase}}</router-link><p id="status">{{product.status}}</p>
-                                    </h5>
-                                    <div class="clearfix"></div>
-                                    <p>{{ product.description | truncatechars(60)}}</p>
-                                    <p>{{product.seller}}</p>
-                                </div>
+                <div class="card category" v>
+                    <h3 class="card-title">{{category.title}}</h3>
+                    <div class="card-columns" v-if="category.products && category.products.length">
+                        <div class="card" v-for="product of category.products" :key="product.id">
+                            <div class="card-body">
+                                <img class="card-img-top" src="" alt="product cap" >
+                                <h5 class="card-title">
+                                    <router-link v-bind:to="'/products/' + product.slug +'/'+ product.id ">{{product.title | uppercase}}</router-link>
+                                    <p  id="status">{{product.status}}</p>
+                                </h5>
+                                <div class="clearfix"></div>
+                                                                    <p id="amount">{{ product.price }}</p>
+                                <p>{{ product.description | truncatechars(60)}}</p>
+                                <button href="#" class="btn btn-secondary"><i class="fas fa-shopping-cart"></i></button>
                             </div>
                         </div>
+                    </div>
                 </div>
                 </div>
             </div>
@@ -49,17 +54,35 @@
 </template>
 
 <script>
+import {SlideYUpTransition} from 'vue2-transitions';
 export default {
+    components: {
+        'slide-transition': SlideYUpTransition,
+    },
+    props : {
+        isActive: {
+            type: Boolean,
+        }
+    },
     data() {
         return {
             categories: {},
             errors: null,
+            loading: true,
+            filter_toggle: false,
         }
     },
     async mounted() {
         try {
-            const response = await this.$http.get('http://127.0.0.1:8000/api/categories/')
-            this.categories = response.data
+            const response = await this.$http.get('http://127.0.0.1:8000/api/categories/');
+            if (response.data !== null) {
+                this.loading = false;
+                return this.categories = response.data;
+                
+            } else {
+                return this.loading;
+            }
+            
         } catch (e) {
             this.errors.push(e)
         }
@@ -70,6 +93,9 @@ export default {
 <style lang="scss" scoped>
     #categories {
         padding: 100px 0;
+        section {
+            min-height: 30vh;
+        }
     }
     /*override border in .card*/
     .category {
@@ -115,6 +141,7 @@ export default {
     .options {
         position: relative;
         width: 100%;
+        padding-bottom: 15px;
         ul {
             display: flex;
             display: -webkit-flex;
@@ -131,7 +158,6 @@ export default {
                     }
                 }
                 .filter-options {
-                    display: none;
                     width: 100%;
                     margin: auto;
                     padding: 10px;
@@ -150,6 +176,12 @@ export default {
         padding: 0 10px;
     }
 
+    .loading-icon {
+        width: 50%;
+        margin: auto;
+        padding: 10px 0;
+    }
+
 // Responsiveness
     @media (min-width: 576px) {
         #categories {
@@ -157,6 +189,9 @@ export default {
         }
         .card-columns {
             column-count: 4 !important;
+        }
+        .loading-icon {
+            padding-left: 65px;
         }
     }
 </style>

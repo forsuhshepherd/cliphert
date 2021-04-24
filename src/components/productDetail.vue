@@ -1,10 +1,10 @@
 <template>
     <div id="product">
         <main class="container">
-            <h4 class="mb-4">More about {{ id }}</h4>
             <div class="row">
                 <div class="col-xl-9 col-lg-9 col-md-10 col-sm-12 col-xs-12 border-secondary row pb-4">
                     <div class="product-pics col-xl-5 col-lg-5 col-md-4 col-sm-12 col-xs-12">
+                        
                         <div id="primary-pic" class="card">
                             <img src="" alt="preview">
                         </div>
@@ -18,10 +18,11 @@
                     <aside class="product-details col-xl-7 col-lg-7 col-md-8 col-sm-12 col-xs-12">
                         <header>
                             <h4>{{ product.title }}</h4>
-                            <i v-bind:class="{ 'text-primary':isActive, 'text-danger': !isActive}">{{ product.status }}</i> 
+                            <i v-bind:class="{ 'text-primary': !isActive, 'text-danger': isActive}">{{ product.status }}</i> 
                         </header>
                         <div class="d-flex justify-content-between flex-wrap pb-2">
                             <i>Seller: {{ product.seller }}</i>
+                            <i>Price: {{ product.price }}</i>
                             <i>Posted on: {{ product.timestamp }}</i>
                         </div>
                         <p>{{ product.description }}</p>
@@ -42,22 +43,24 @@
 
 <script>
 export default {
+    props: {isActive:Boolean},
     data() {
         return {
             id: this.$route.params.id,
-            product: {},
+            slug: this.$route.params.slug,
+            product: [],
             error: [],
-            isActive: true,
+            similar_products: [],
         }
     },
     async mounted() {
         try {
             this.$http.get('http://127.0.0.1:8000/api/product/' + this.id).then(function(res){
-                console.log(this.product);
                 this.product = res.body;
                 if (this.product.status !== "on-sale") {
-                    return this.isActive == false;
-                }
+                    this.isActive = false;
+                    return;
+                } else { return;}
             })
         } catch (e) {
             this.error.push(e)

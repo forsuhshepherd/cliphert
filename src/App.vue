@@ -19,7 +19,15 @@ export default {
     //'category-tag': Products,
     //'carousel-tag':Carousel,
     'footer-tag':Footer,
-  }
+  },
+  data() {
+    return {
+      isActive: false,
+    }
+  },
+  methods: {
+    
+  },
 }
 </script>
 
