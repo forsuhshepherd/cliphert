@@ -1,5 +1,5 @@
 <template>
-    <footer id="footer" class="footer">
+    <footer id="footer" class="footer container-fluid">
         <a href="#" id="toTop"> Back to Top </a>
         <div class="clearfix"></div>
         <div class="copyright">

@@ -6,13 +6,13 @@
                     <div class="product-pics col-xl-5 col-lg-5 col-md-4 col-sm-12 col-xs-12">
                         
                         <div id="primary-pic" class="card">
-                            <img src="" alt="preview">
+                            <img src="..\assets\media\sales-and-marketing-1974353-1663836.png" width="300" height="400" alt="preview">
                         </div>
                         <div id="more-pics" class="card">
-                            <img src="" alt="preview">
-                            <img src="" alt="preview">
-                            <img src="" alt="preview">
-                            <img src="" alt="preview">
+                            <img src="..\assets\media\sales-and-marketing-1974353-1663836.png" width="50" height="80" alt="preview">
+                            <img src="..\assets\media\sales-and-marketing-1974353-1663836.png" width="50" height="80" alt="preview">
+                            <img src="..\assets\media\sales-and-marketing-1974353-1663836.png" width="50" height="80" alt="preview">
+                            <img src="..\assets\media\sales-and-marketing-1974353-1663836.png" width="0" height="80" alt="preview">
                         </div>
                     </div>
                     <aside class="product-details col-xl-7 col-lg-7 col-md-8 col-sm-12 col-xs-12">
@@ -22,13 +22,13 @@
                         </header>
                         <div class="d-flex justify-content-between flex-wrap pb-2">
                             <i>Seller: {{ product.seller }}</i>
-                            <i>Price: {{ product.price }}</i>
+                            <i>Price: {{ product.price }} XAF</i>
                             <i>Posted on: {{ product.timestamp }}</i>
                         </div>
                         <p>{{ product.description }}</p>
                         <div class="mt-5 d-flex justify-content-between flex-wrap">
                             <a href="#" type="button" class="btn btn-secondary"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                            <router-link class="btn btn-secondary" to="/buy"><i class="fas fa-buysellads"></i> Buy</router-link>
+                            <a class="btn btn-secondary" @click="showModal=true"><i class="fas fa-business-time"></i> Buy</a>
                         </div>
                     </aside>
                     <div class="col-xl-3 col-lg-3 col-md-2 col-sm-12 col-xs-12"></div>
@@ -38,24 +38,36 @@
                 <h5>Similar Products</h5>
             </article>
         </main>
+        <paymentmethod v-if="showModal" @close="showModal = false">
+
+        </paymentmethod>
     </div>
 </template>
 
 <script>
+import PaymentMethod from './paymentMethods.vue';
+
 export default {
-    props: {isActive:Boolean},
+    components: {
+        'paymentmethod': PaymentMethod,
+    },
+    props: {isActive:{type:Boolean}, 
+        fetch_error_msg: {type: String},
+    },
     data() {
         return {
             id: this.$route.params.id,
             slug: this.$route.params.slug,
             product: [],
             error: [],
-            similar_products: [],
+            other_products: [],
+            showModal: false,
         }
     },
     async mounted() {
         try {
-            this.$http.get('http://127.0.0.1:8000/api/product/' + this.id).then(function(res){
+            this.$http.get('http://127.0.0.1:8000/api/product/' + this.id)
+            .then(function(res){
                 this.product = res.body;
                 if (this.product.status !== "on-sale") {
                     this.isActive = false;

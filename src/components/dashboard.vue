@@ -18,15 +18,15 @@
                         </slide-transition>
                     </li>
                     <li class="search">
-                        <input class="" type="text" placeholder="Search">
-                        <button class="btn-secondary">Go</button>
+                        <input class="p-1" type="text" placeholder="Search">
+                        <button class="p-1 btn-secondary pl-2 pr-2"><i class="fas fa-search"></i></button>
                     </li>
                 </ul>
             </div>
             <div class="loading-icon" v-show="loading"><img loading="lazy" class="img-fluid" src="../assets/YCZH.gif" alt="loading"></div>
             <!-- Categories and products -->
-            <div v-if="categories && categories.length">
-                <div v-for="category of categories" :key="category.id">
+            <div v-if="getProductsByCategory() && getProductsByCategory().length">
+                <div v-for="category in getProductsByCategory()" :key="category.id">
                 <div class="card category" v>
                     <h3 class="card-title">{{category.title}}</h3>
                     <div class="card-columns" v-if="category.products && category.products.length">
@@ -34,11 +34,11 @@
                             <div class="card-body">
                                 <img class="card-img-top" src="" alt="product cap" >
                                 <h5 class="card-title">
-                                    <router-link v-bind:to="'/products/' + product.slug +'/'+ product.id ">{{product.title | uppercase}}</router-link>
-                                    <p  id="status">{{product.status}}</p>
+                                    <router-link @click="reset" v-bind:to="'/products/' + product.slug +'/'+ product.id ">{{product.title | uppercase}}</router-link>
+                                    <p id="status">{{product.status}}</p>
                                 </h5>
                                 <div class="clearfix"></div>
-                                                                    <p id="amount">{{ product.price }}</p>
+                                <p id="amount">{{ product.price }} XAF</p>
                                 <p>{{ product.description | truncatechars(60)}}</p>
                                 <button href="#" class="btn btn-secondary"><i class="fas fa-shopping-cart"></i></button>
                             </div>
@@ -55,6 +55,7 @@
 
 <script>
 import {SlideYUpTransition} from 'vue2-transitions';
+
 export default {
     components: {
         'slide-transition': SlideYUpTransition,
@@ -62,11 +63,12 @@ export default {
     props : {
         isActive: {
             type: Boolean,
-        }
+        },
+        fetch_error_msg: {type: String},
     },
     data() {
         return {
-            categories: {},
+            categories: null,
             errors: null,
             loading: true,
             filter_toggle: false,
@@ -85,6 +87,15 @@ export default {
             
         } catch (e) {
             this.errors.push(e)
+        }
+    },
+    methods: {
+        getProductsByCategory: function() {
+            let categories = this.categories
+            return categories
+        },
+        reset: function() {
+            this.getProductsByCategory = null
         }
     },
 }
@@ -139,7 +150,6 @@ export default {
 
     /* Filters and Searches */
     .options {
-        position: relative;
         width: 100%;
         padding-bottom: 15px;
         ul {
