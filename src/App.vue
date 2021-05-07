@@ -25,7 +25,7 @@ export default {
       API_HOST: '127.0.0.1:8000/',
       isActive: false,
 
-      fetch_error_msg: 'Unable to retrieve data, please try again later.'
+      errorMsg: 'Unable to retrieve data, please try again later.'
     }
   },
   methods: {

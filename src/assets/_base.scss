@@ -39,15 +39,15 @@ a {
 // Header and Navigation
 .header {
     width: 100%;
-    z-index: 60px;
-    //height: 60px;
+    z-index: 30;
+    height: 60px;
     @include transition (none);
     @include box-shadow(0 0 4px rgba(0, 0, 0, 0.5));
     &.header-scrolled {
         position: fixed;
         background: #fff;
         a {
-            color: lighten($color: $color-secondary, $amount: 10);
+            color: lighten($color: $color-secondary, $amount: 5);
         }
         .logo {
             color: $color-primary;

@@ -23,37 +23,52 @@
                     </li>
                 </ul>
             </div>
-            <div class="loading-icon" v-show="loading"><img loading="lazy" class="img-fluid" src="../assets/YCZH.gif" alt="loading"></div>
+            <div v-if="errored">
+                <p class="pt-5 pb-5 text-center text-info" v-bind="errorMsg"></p>
+            </div>
+
             <!-- Categories and products -->
-            <div v-if="getProductsByCategory() && getProductsByCategory().length">
-                <div v-for="category in getProductsByCategory()" :key="category.id">
-                <div class="card category" v>
-                    <h3 class="card-title">{{category.title}}</h3>
-                    <div class="card-columns" v-if="category.products && category.products.length">
-                        <div class="card" v-for="product of category.products" :key="product.id">
-                            <div class="card-body">
-                                <img class="card-img-top" src="" alt="product cap" >
-                                <h5 class="card-title">
-                                    <router-link @click="reset" v-bind:to="'/products/' + product.slug +'/'+ product.id ">{{product.title | uppercase}}</router-link>
-                                    <p id="status">{{product.status}}</p>
-                                </h5>
-                                <div class="clearfix"></div>
-                                <p id="amount">{{ product.price }} XAF</p>
-                                <p>{{ product.description | truncatechars(60)}}</p>
-                                <button href="#" class="btn btn-secondary"><i class="fas fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
+            <div v-else>
+                <div v-if="loading">
+                    <div class="loading-icon">
+                        <img loading="lazy" class="img-fluid" src="../assets/YCZH.gif" alt="loading">
                     </div>
                 </div>
+                
+                <div v-else>
+                    <div v-if="getProductsByCategory() && getProductsByCategory().length">
+                    <div v-for="category in getProductsByCategory()" :key="category.id">
+                        <div class="card category">
+                            <h3 class="card-title">{{category.title}}</h3>
+                            <div class="card-columns" v-if="category.products && category.products.length">
+                                <div class="card" v-for="product of category.products" :key="product.id">
+                                    <div class="card-body">
+                                        <router-link @click="reset" v-bind:to="'/products/' + product.slug +'/'+ product.id ">
+                                            <img class="card-img" src="../assets/media/TSFH Battlecry.jpg" alt="product cap" >
+                                            
+                                            <h5 class="card-title">{{product.title | uppercase}}</h5>
+                                            <!--<p id="status">{{product.status}}</p>-->
+                                            <span class="card-text pt-3">
+                                                <p id="amount">{{ product.price }} XAF</p>
+                                                <p>{{ product.description | truncatechars(60)}}</p>
+                                            </span>
+                                            <button class="small-text btn btn-secondary"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                        </router-link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End of v-for -->
+                    </div><!-- End of v-if -->
                 </div>
             </div>
-            <div class="text-info"> {{errors}} </div>
         </div>
     </section>
 </div>
 </template>
 
 <script>
+import axios from 'axios';
 import {SlideYUpTransition} from 'vue2-transitions';
 
 export default {
@@ -61,38 +76,32 @@ export default {
         'slide-transition': SlideYUpTransition,
     },
     props : {
-        isActive: {
-            type: Boolean,
-        },
-        fetch_error_msg: {type: String},
+        isActive: Boolean,
+        errorMsg: String,
     },
     data() {
         return {
             categories: null,
-            errors: null,
+            errored: false,
             loading: true,
             filter_toggle: false,
         }
     },
-    async mounted() {
-        try {
-            const response = await this.$http.get('http://127.0.0.1:8000/api/categories/');
-            if (response.data !== null) {
-                this.loading = false;
-                return this.categories = response.data;
-                
-            } else {
-                return this.loading;
-            }
-            
-        } catch (e) {
-            this.errors.push(e)
-        }
+    mounted() {
+        let url = 'http://127.0.0.1:8000/api/categories/'
+        axios.get(url)
+            .then(res => {
+                this.categories = res.data
+            })
+            .catch(err => {
+                console.log(err)
+                this.errored = true
+            })
+            .finally(() => this.loading = false)
     },
     methods: {
-        getProductsByCategory: function() {
-            let categories = this.categories
-            return categories
+        getProductsByCategory() {
+            return this.categories
         },
         reset: function() {
             this.getProductsByCategory = null
@@ -129,6 +138,16 @@ export default {
     */
     .card a {
         color: #00008B;
+        &:hover {
+            background-color: #ddd !important;
+            text-decoration: none !important;
+        }
+
+        .card-img {
+            //margin: auto;
+            //width: 250px;
+            height: 200px;
+        }
     }
     .card-columns .card-body {
         padding: 1.0rem !important;
@@ -137,15 +156,22 @@ export default {
         padding: 10px 0;
         border-bottom: 1px solid #ddd;
     }
-    .card-title #status {
+    /*.card-title #status {
         float:right;
         font-size: small;
         color: #3CB371;
         margin-top: 10px;
-    }
-    .card-body p {
-        color:  #4D4D4D;
-        font: 200 unset normal semi-expanded 60% inherit -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }*/
+    .card-body {
+        p {
+            color:  #4D4D4D;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            &:first-child {
+                font-size: 0.9rem;
+            }
+            font-size: 0.80rem;
+            
+        }
     }
 
     /* Filters and Searches */
@@ -191,6 +217,9 @@ export default {
         margin: auto;
         padding: 10px 0;
     }
+    .small-text {
+        font-size: 0.8em;
+    }
 
 // Responsiveness
     @media (min-width: 576px) {
@@ -204,4 +233,4 @@ export default {
             padding-left: 65px;
         }
     }
-</style>
+</style> 

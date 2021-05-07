@@ -28,7 +28,7 @@
                         <p>{{ product.description }}</p>
                         <div class="mt-5 d-flex justify-content-between flex-wrap">
                             <a href="#" type="button" class="btn btn-secondary"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                            <a class="btn btn-secondary" @click="showModal=true"><i class="fas fa-business-time"></i> Buy</a>
+                            <button type="button" class="btn btn-secondary" @click="showModal=true"><i class="fas fa-business-time"></i> Buy</button>
                         </div>
                     </aside>
                     <div class="col-xl-3 col-lg-3 col-md-2 col-sm-12 col-xs-12"></div>
@@ -38,18 +38,25 @@
                 <h5>Similar Products</h5>
             </article>
         </main>
-        <paymentmethod v-if="showModal" @close="showModal = false">
-
-        </paymentmethod>
+        <modal v-show="showModal" @close="showModal=false">
+            <template v-slot:heading>
+                <h5>Please select a payment method.</h5>
+            </template>
+            <template v-slot:body>              
+            </template>
+        </modal>
+        <payments></payments> 
     </div>
 </template>
 
 <script>
-import PaymentMethod from './paymentMethods.vue';
+import Modal from './modal.vue';
+import Payments from './payments.vue';
 
 export default {
     components: {
-        'paymentmethod': PaymentMethod,
+        'modal': Modal,
+        'payments': Payments,
     },
     props: {isActive:{type:Boolean}, 
         fetch_error_msg: {type: String},
@@ -62,6 +69,7 @@ export default {
             error: [],
             other_products: [],
             showModal: false,
+            payment_methods: null,
         }
     },
     async mounted() {
@@ -77,7 +85,7 @@ export default {
         } catch (e) {
             this.error.push(e)
         }
-    }
+    },
     
 }
 </script>
