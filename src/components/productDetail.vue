@@ -15,20 +15,30 @@
                             <img src="..\assets\media\sales-and-marketing-1974353-1663836.png" width="0" height="80" alt="preview">
                         </div>
                     </div>
-                    <aside class="product-details col-xl-7 col-lg-7 col-md-8 col-sm-12 col-xs-12">
-                        <header>
-                            <h4>{{ product.title }}</h4>
-                            <i v-bind:class="{ 'text-primary': !isActive, 'text-danger': isActive}">{{ product.status }}</i> 
-                        </header>
-                        <div class="d-flex justify-content-between flex-wrap pb-2">
-                            <i>Seller: {{ product.seller }}</i>
-                            <i>Price: {{ product.price }} XAF</i>
-                            <i>Posted on: {{ product.timestamp }}</i>
+
+                    <div v-if="errored">
+                        <p class="pt-5 pb-5 text-center text-info"> {{ errorMsg }} </p>
+                    </div>
+                    
+                    <aside v-else class="product-details col-xl-7 col-lg-7 col-md-8 col-sm-12 col-xs-12">
+                        <div v-if="loading" class="loading-icon">
+                            <img loading="lazy" class="img-fluid" src="../assets/YCZH.gif" alt="loading">
                         </div>
-                        <p>{{ product.description }}</p>
-                        <div class="mt-5 d-flex justify-content-between flex-wrap">
-                            <a href="#" type="button" class="btn btn-secondary"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                            <button type="button" class="btn btn-secondary" @click="showModal=true"><i class="fas fa-business-time"></i> Buy</button>
+                        <div v-bind:class="{'d-none': loading}" >
+                            <header>
+                                <h4>{{ product.title }}</h4>
+                                <i v-bind:class="{ 'text-primary': !isActive, 'text-danger': isActive}">{{ product.status }}</i> 
+                            </header>
+                            <div class="d-flex justify-content-between flex-wrap pb-2">
+                                <i>Seller: {{ product.seller }}</i>
+                                <i>Price: {{ product.price }} XAF</i>
+                                <i>Posted on: {{ product.timestamp }}</i>
+                            </div>
+                            <p>{{ product.description }}</p>
+                            <div class="mt-5 d-flex justify-content-between flex-wrap">
+                                <a href="#" type="button" class="btn btn-secondary"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                <button type="button" class="btn btn-secondary" @click="showModal=true"><i class="fas fa-business-time"></i> Buy</button>
+                            </div>
                         </div>
                     </aside>
                     <div class="col-xl-3 col-lg-3 col-md-2 col-sm-12 col-xs-12"></div>
@@ -42,14 +52,15 @@
             <template v-slot:heading>
                 <h5>Please select a payment method.</h5>
             </template>
-            <template v-slot:body>              
+            <template v-slot:body>
+                <payments></payments>
             </template>
         </modal>
-        <payments></payments> 
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 import Modal from './modal.vue';
 import Payments from './payments.vue';
 
@@ -59,34 +70,45 @@ export default {
         'payments': Payments,
     },
     props: {isActive:{type:Boolean}, 
-        fetch_error_msg: {type: String},
+        errorMsg: {type: String},
     },
     data() {
         return {
             id: this.$route.params.id,
             slug: this.$route.params.slug,
             product: [],
-            error: [],
-            other_products: [],
+            errored: false,
+            loading: true,
+            similarProducts: [],
             showModal: false,
-            payment_methods: null,
+            //paymentMethods: [],
         }
     },
-    async mounted() {
-        try {
-            this.$http.get('http://127.0.0.1:8000/api/product/' + this.id)
-            .then(function(res){
-                this.product = res.body;
-                if (this.product.status !== "on-sale") {
-                    this.isActive = false;
-                    return;
-                } else { return;}
+    mounted() {
+        axios.get('http://127.0.0.1:8000/api/product/' + this.id)
+            .then(res => {
+                this.product = res.data
             })
-        } catch (e) {
-            this.error.push(e)
-        }
+            .catch(err => {
+                console.log(err)
+                this.errored = true
+                this.errorMsg = err
+            })
+            .finally(() => this.loading = false)
     },
-    
+    /*methods: {
+        getPaymentMethods() {
+            if (this.showModal == true) {
+                axios.get('http://127.0.0.1:8000/api/payment_methods/')
+                    .then(res => {
+                        return this.paymentMethods = res.data
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            } else {return;}
+        }
+    }  */ 
 }
 </script>
 
@@ -140,4 +162,4 @@ export default {
     margin-top: 50px;
 }
     
-</style>
+</style> 

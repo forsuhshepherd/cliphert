@@ -96,4 +96,11 @@ export default {
     border: 1px solid #4AAE9B;
     border-radius: 2px;
   }
+
+  /* RESPONSIVENESS */
+  @media (min-width: 576px) {
+    .modal-dialog {
+      min-width: 450px;
+    }
+  }
 </style>
