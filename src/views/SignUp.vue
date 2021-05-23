@@ -1,23 +1,23 @@
 <template>
-  <div class="home">
+  <div class="sign-up">
     <Header/>
-    <Carousel/>
+    <SignUp/>
     <Footer/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import SignUp from "@/components/signUp.vue";
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
-import Carousel from "@/components/carousel.vue";
 
 export default {
   name: "Home",
   components: {
-    Header,
-    Footer,
-    Carousel,
+      SignUp,
+      Header,
+      Footer
   },
 };
 </script>
