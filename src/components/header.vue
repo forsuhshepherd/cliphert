@@ -77,11 +77,8 @@ export default {
                 //Collapse mobile menu after clicking
                 if ($('.navbar-collapse').hasClass('show')){
                     $('.navbar-collapse').removeClass('show');
-                }
-                
+                } 
             });
-
-
         });
     },
 }

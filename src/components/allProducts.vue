@@ -42,7 +42,7 @@ export default {
     name: 'allProducts',
     props : {
         products: {type: Object}, errored: {type: Boolean, default: false}, 
-        loading: {type: Boolean, default: true}, errorMsg: {type: String}
+        loading: {type: Boolean, default: false}, errorMsg: {type: String}
     },
     data() {
         return {

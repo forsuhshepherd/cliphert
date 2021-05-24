@@ -3,7 +3,6 @@
     <Header/>
     <div id="products">
         <section class="container">
-            <div>
                 <!-- Filter and Search options -->
                 <div class="options">
                     <ul class="bg-light">
@@ -45,7 +44,6 @@
                 </div>
                 <products :products="products" :errorMsg="errorMsg" :errored="errored" :isActive="isActive"></products>
                 <!--<categories :errorMsg="errorMsg" :isActive="isActive"></categories>-->
-            </div>
         </section>
     </div>
     <Footer/>
