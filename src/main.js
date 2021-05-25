@@ -6,7 +6,6 @@ import store from "./store";
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'D:/MY-PROJECTS/Tutorials/fontawesome-free-5.15.3-web/css/all.min.css';
 import './assets/app.css';
 
 Vue.config.productionTip = false;
