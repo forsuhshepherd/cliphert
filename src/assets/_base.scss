@@ -184,15 +184,18 @@ a {
 }
 
 // DASHBOARD 
+.small-text {
+    font-size: 0.8em;
+  }
+.btn-small {
+    padding: .325rem .45rem;
+}
 .loading-icon {
     width: 50%;
     margin: auto;
     padding: 10px 0;
   }
-  .small-text {
-    font-size: 0.8em;
-  }
-  
+
   // Responsiveness
   @media (min-width: 576px) {
     .loading-icon {
@@ -204,8 +207,9 @@ a {
 #dashboard {
     min-height: 100vh;
     .card {
+        line-height: 0.5;
         width: 200px;
-        height: 280px;
+        max-height: 263px;
         .card-title {
             margin-bottom: 0.65rem !important;
             display: flex;

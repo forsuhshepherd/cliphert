@@ -17,14 +17,14 @@
 
                 <span class="card-title">
                   <h6>{{ product.title | uppercase }}</h6>
-                  <i id="amount">{{ product.price }} XAF</i>
+                  <i class="small-text">{{ product.price }} XAF</i>
                 </span>
                 <!--<p id="status">{{product.status}}</p>-->
                 <span class="card-text pt-3">
                   <p>{{ product.description | truncatechars(60) }}</p>
                 </span>
               </router-link>
-              <button class="small-text btn btn-secondary">
+              <button class="small-text btn btn-small btn-secondary">
                 <i class="fas fa-shopping-cart"></i> Add to Cart
               </button>
             </div>
