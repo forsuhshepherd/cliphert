@@ -1,6 +1,6 @@
 const {VueLoaderPlugin} = require("vue-loader");
 const path = require("path");
-//const {ModuleReplacementPlugin} = require('webpack');
+const {ModuleReplacementPlugin} = require('webpack');
 
 module.exports = {
     entry: {
@@ -25,7 +25,7 @@ module.exports = {
       ],
     },
     plugins: [
-      //new ModuleReplacementPlugin(),
+      new ModuleReplacementPlugin(),
       new VueLoaderPlugin(),
     ],
     resolve: {
