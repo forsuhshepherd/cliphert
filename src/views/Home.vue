@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <Header/>
-    <Carousel/>
-    <Footer/>
+    <Header />
+    <Carousel />
+    <Footer />
   </div>
 </template>
 

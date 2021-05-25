@@ -1,8 +1,8 @@
 <template>
   <div class="sign-up">
-    <Header/>
-    <SignUp/>
-    <Footer/>
+    <Header />
+    <SignUp />
+    <Footer />
   </div>
 </template>
 
@@ -15,9 +15,9 @@ import Footer from "@/components/footer.vue";
 export default {
   name: "Home",
   components: {
-      SignUp,
-      Header,
-      Footer
+    SignUp,
+    Header,
+    Footer,
   },
 };
 </script>

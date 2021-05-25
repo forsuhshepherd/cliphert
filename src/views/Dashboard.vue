@@ -1,56 +1,96 @@
 <template>
-<div id="dashboard">
-    <Header/>
+  <div id="dashboard">
+    <Header />
     <div id="products">
-        <section class="container">
-                <!-- Filter and Search options -->
-                <div class="options">
-                    <ul class="bg-light">
-                        <li class="filters">
-                            <h5 class="filter-header"><a href="#" @click="filter_toggle=!filter_toggle">
-                                <i class="fas fa-filter"></i> Filter </a></h5>
-                            <slide-transition>
-                                <ul class="filter-options" v-show="filter_toggle" id="filter">
-                                    <li class="option" value="">Type
-                                        <div class="pt-3">
-                                            <div>
-                                                <input class="pr-2" type="checkbox" name="all" id="all-products">
-                                                <label class="pl-2" for="all-products" true>All</label>
-                                            </div>
-                                             <div>
-                                                <input class="pr-2" type="checkbox" name="recent" id="recent-products">
-                                                <label class="pl-2" for="recent-products" true>Recent</label>
-                                            </div> 
-                                            <br/>                                          
-                                            <div v-if="getAllCategories() && getAllCategories().length">
-                                                <div class="pb-3">Categories</div>
-                                                <li v-for="category in getAllCategories()" :key="category.id">
-                                                    <input class="pr-2" type="checkbox" :name="category.slug" :id="category.id">
-                                                    <label class="pl-2" :for="category.id">{{ category.slug }}</label>
-                                                </li>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="option">Price</li>
-                                    <li class="option">Location</li>
-                                </ul>
-                            </slide-transition>
+      <section class="container">
+        <!-- Filter and Search options -->
+        <div class="options">
+          <ul class="bg-light">
+            <li class="filters">
+              <h5 class="filter-header">
+                <a href="#" @click="filter_toggle = !filter_toggle">
+                  <i class="fas fa-filter"></i> Filter
+                </a>
+              </h5>
+              <slide-transition>
+                <ul class="filter-options" v-show="filter_toggle" id="filter">
+                  <li class="option" value="">
+                    Type
+                    <div class="pt-3">
+                      <div>
+                        <input
+                          class="pr-2"
+                          type="checkbox"
+                          name="all"
+                          id="all-products"
+                        />
+                        <label class="pl-2" for="all-products" true>All</label>
+                      </div>
+                      <div>
+                        <input
+                          class="pr-2"
+                          type="checkbox"
+                          name="recent"
+                          id="recent-products"
+                        />
+                        <label class="pl-2" for="recent-products" true
+                          >Recent</label
+                        >
+                      </div>
+                      <br />
+                      <div
+                        v-if="getAllCategories() && getAllCategories().length"
+                      >
+                        <div class="pb-3">Categories</div>
+                        <li
+                          v-for="category in getAllCategories()"
+                          :key="category.id"
+                        >
+                          <input
+                            class="pr-2"
+                            type="checkbox"
+                            :name="category.slug"
+                            :id="category.id"
+                          />
+                          <label class="pl-2" :for="category.id">{{
+                            category.slug
+                          }}</label>
                         </li>
-                        <li class="search">
-                            <input class="p-1" type="text" placeholder="Search">
-                            <button class="p-1 btn-secondary pl-2 pr-2"><i class="fas fa-search"></i></button>
-                        </li>
-                    </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="option">Price</li>
+                  <li class="option">Location</li>
+                </ul>
+              </slide-transition>
+            </li>
+            <li class="search">
+              <form action="" method="get">
+                <div class="form-group">
+                  <input class="form-input" type="text" placeholder="Search" />
                 </div>
-                <products :products="products" :errorMsg="errorMsg" :errored="errored" :isActive="isActive"></products>
-                <!--<categories :errorMsg="errorMsg" :isActive="isActive"></categories>-->
-        </section>
+                <button class="p-1 btn-secondary pl-2 pr-2">
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
+            </li>
+          </ul>
+        </div>
+        <products
+          :products="products"
+          :errorMsg="errorMsg"
+          :errored="errored"
+          :isActive="isActive"
+        ></products>
+        <!--<categories :errorMsg="errorMsg" :isActive="isActive"></categories>-->
+      </section>
     </div>
-    <Footer/>
-</div>
+    <Footer />
+  </div>
 </template>
 
 <script>
+/*eslint-disable*/
 import axios from 'axios';
 //import productByCategory from './productByCategory.vue';
 import Header from '../components/header.vue';
