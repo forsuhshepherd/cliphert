@@ -8,9 +8,9 @@
     <div class="container">
       <h1 class="logo">
         <router-link to="/home" class="navbar-brand nav-logo" exact>
-          <span class="logo-icon-wrapper"
+          <!--<span class="logo-icon-wrapper"
             ><img class="logo-icon" src=""
-          /></span>
+          /></span>-->
           <span class="text"><span class="highlight">CLIPHERT</span></span>
         </router-link>
       </h1>

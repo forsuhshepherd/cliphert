@@ -183,8 +183,25 @@ a {
     color: #3CB371 !important;
 }
 
+// DASHBOARD 
+.loading-icon {
+    width: 50%;
+    margin: auto;
+    padding: 10px 0;
+  }
+  .small-text {
+    font-size: 0.8em;
+  }
+  
+  // Responsiveness
+  @media (min-width: 576px) {
+    .loading-icon {
+      padding-left: 65px;
+    }
+  }
+
 // CARDS
-#products {
+#dashboard {
     min-height: 100vh;
     .card {
         width: 200px;

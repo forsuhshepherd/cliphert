@@ -1,22 +1,6 @@
 <template>
-  <div v-if="errored">
-    <p class="pt-5 pb-5 text-center text-info">{{ errorMsg }}</p>
-  </div>
-
   <!-- Categories and products -->
-  <div v-else>
-    <div v-if="loading">
-      <div class="loading-icon">
-        <img
-          loading="lazy"
-          class="img-fluid"
-          src="../assets/YCZH.gif"
-          alt="loading"
-        />
-      </div>
-    </div>
-
-    <div v-else>
+    <div>
       <div class="card-deck" v-if="getAllProducts() && getAllProducts().length">
         <div class="" v-for="product in getAllProducts()" :key="product.id">
           <div class="card">
@@ -49,7 +33,6 @@
       </div>
       <!-- End of v-for -->
     </div>
-  </div>
 </template>
 
 <script>
@@ -113,21 +96,6 @@ export default {
       font-size: 0.9rem;
     }
     font-size: 0.8rem;
-  }
-}
-.loading-icon {
-  width: 50%;
-  margin: auto;
-  padding: 10px 0;
-}
-.small-text {
-  font-size: 0.8em;
-}
-
-// Responsiveness
-@media (min-width: 576px) {
-  .loading-icon {
-    padding-left: 65px;
   }
 }
 </style>
