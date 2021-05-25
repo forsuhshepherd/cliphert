@@ -6,7 +6,7 @@
           <div class="card">
             <div class="card-body">
               <router-link
-                @click="reset"
+                @click="reset" class="card-body"
                 v-bind:to="'/products/' + product.slug + '/' + product.id"
               >
                 <img
