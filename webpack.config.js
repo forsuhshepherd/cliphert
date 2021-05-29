@@ -1,6 +1,8 @@
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {VueLoaderPlugin} = require("vue-loader");
 const path = require("path");
 const {ModuleReplacementPlugin} = require('webpack');
+const { join } = require('path');
 
 module.exports = {
     entry: {
@@ -27,6 +29,14 @@ module.exports = {
     plugins: [
       new ModuleReplacementPlugin(),
       new VueLoaderPlugin(),
+      new HTMLWebpackPlugin({
+        options: {
+          showErrors: true,
+          cache: 'true',
+          title: 'Cliphert',
+          template: join(__dirname, 'index.html')
+        }
+      })
     ],
     resolve: {
       alias: {

@@ -59,7 +59,7 @@
                     </div>
                   </div>
                   <div v-else>
-                    <products :products="products" :isActive="isActive"></products>
+                    <products :products="products" :is-active="is-active"></products>
                     <!--<categories :errorMsg="errorMsg" :isActive="isActive"></categories>-->
                   </div>
 

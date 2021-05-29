@@ -40,9 +40,7 @@ export default {
   name: "allProducts",
   props: {
     products: { type: Object },
-    errored: { type: Boolean, default: false },
-    loading: { type: Boolean, default: false },
-    errorMsg: { type: String },
+    isActive: {type: Boolean, default: false}
   },
   data() {
     return {};
