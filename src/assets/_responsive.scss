@@ -20,6 +20,37 @@
     .main-nav .navbar-collapse .nav-item a {
         text-align: center;
     }
+
+    .hero-section .figure-image {
+        width: 300px;
+    }
+    .hero-carousel .carousel-inner .heading {
+        font-size: 26px;
+    }
+    
+    .hero-carousel .carousel-inner .item-content-inner {
+        padding-top: 100px;
+    }
+    .hero-section .figure-holder .figure-image {
+        width: inherit;
+        bottom: 0;
+        top: inherit;
+        right: inherit;
+        left:15px;
+        max-width: 320px;
+    }
+
+    .hero-carousel {
+        height: 660px;
+    }
+    .hero-section .carousel-inner {
+        height: 660px;
+    }
+    
+    .hero-carousel .carousel-inner .item {
+        height: 660px;
+    }
+
 }
 
 // Medium devices (tablets, 768px and up)
@@ -31,11 +62,46 @@
     .main-nav .navbar-collapse .nav-item {
         margin-right: 0;
     }
+
+    .hero-section .figure-holder .figure-image {
+        width: 360px;
+        bottom: inherit;
+        top: 130px;
+    }
+    .hero-carousel .carousel-inner .item-content-inner {
+        max-width: 300px;
+        padding-top: 120px;
+    }
+
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
     .main-nav .nav .nav-item {
         margin-right: 25px;
+    }
+
+    .feature-nav  {
+        margin-top: 30px;
+        padding-left: 15px;
+    }
+
+    .hero-section .figure-holder .figure-image {
+        width: 420px;
+        bottom: inherit;
+        top: 130px;
+    }
+    .hero-carousel .carousel-inner .item-content-inner {
+        max-width: 500px;
+    }
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+    .hero-section .figure-holder .figure-image {
+        width: 570px;
+        bottom: 0;
+        top: inherit;
     }
 }

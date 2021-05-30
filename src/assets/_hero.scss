@@ -34,6 +34,9 @@
             height: 560px;
             background-position: center center;
         }
+        .item-0 {
+            @include background-size(cover);
+        }
 
         .heading {
             font-size: 30px;

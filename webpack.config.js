@@ -30,12 +30,10 @@ module.exports = {
       new ModuleReplacementPlugin(),
       new VueLoaderPlugin(),
       new HTMLWebpackPlugin({
-        options: {
-          showErrors: true,
-          cache: 'true',
-          title: 'Cliphert',
-          template: join(__dirname, 'index.html')
-        }
+        showErrors: true,
+        cache: 'true',
+        title: 'Cliphert',
+        template: join(__dirname, 'index.html')
       })
     ],
     resolve: {

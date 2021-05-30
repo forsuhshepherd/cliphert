@@ -36,6 +36,88 @@ a {
     }
 }
 
+.btn, a.btn {
+	@include transition (all 0.4s ease-in-out);
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 1.5;
+	.fa {
+		margin-right: 5px;
+	}
+}
+
+.btn-cta, a.btn-cta {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 30px;
+}
+
+.btn-primary {
+	background: $color-primary;
+	border: 1px solid $color-primary;
+	color: #fff;
+	&:hover, &:focus, &:active, &.active, &.hover {
+		background: darken($color-primary, 5%);
+		color: #fff;
+		border: 1px solid darken($color-primary, 5%);
+	}
+
+}
+
+.carousel-fade {
+    .carousel-inner {
+        .item {
+            transition-property: opacity;
+        }
+        
+        .item,
+        .active.left,
+        .active.right {
+            opacity: 0;
+        }
+
+        .active,
+        .next.left,
+        .prev.right {
+            opacity: 1;
+        }
+
+        .next,
+        .prev,
+        .active.left,
+        .active.right {
+            left: 0;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .carousel-control {
+        z-index: 2;
+    }
+}
+
+.carousel-indicators {
+    bottom: 30px;
+    margin-bottom: 0;
+    
+    li {
+        background-color: rgba(256, 256, 256, 0.4);
+        border: none;
+        width: 11px;
+        height: 11px;
+        margin: 0;
+        margin-right: 8px;
+        @include border-radius(50%);
+        &.active {
+            background-color: $color-primary;
+            width: 11px;
+            height: 11px;
+            margin: 0;
+            margin-right: 8px;
+        }
+    }
+}
+
 // Header and Navigation
 .header {
     width: 100%;

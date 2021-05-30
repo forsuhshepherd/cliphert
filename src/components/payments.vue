@@ -14,7 +14,7 @@
               <div>
                 <router-link class="card-title" to="/order">
                   <img src="" class="card-img" alt="preview" />
-                  <p>{{ method.title }}</p>
+                  <p class="text-dark">{{ method.title }}</p>
                 </router-link>
               </div>
             </div>
